@@ -3,12 +3,15 @@ import psycopg2
 
 conn = psycopg2.connect(**params)
 
-k = input("Who is delete? ")
+k = input("Who is find? ")
 
 cur = conn.cursor()
 
 
-cur.execute("CALL delete_user(%s)", (k, ))
+cur.execute("SELECT * FROM return_all_same_user(%s)", (k, ))
+result = cur.fetchall()
+print(result)
+
 conn.commit()
 
 cur.close()
